@@ -1,0 +1,1 @@
+const val SEARCH: String = "/?q=simpsons+characters&format=json"

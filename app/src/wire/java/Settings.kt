@@ -1,0 +1,1 @@
+const val SEARCH: String = "/?q=the+wire+characters&format=json"
