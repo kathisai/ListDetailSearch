@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.sample.simpsonsviewer.R
 import com.sample.simpsonsviewer.models.RelatedTopic
@@ -34,10 +35,15 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
-            Log.d("test", "URL" + param1?.Icon?.URL)
+            Log.d("test", "URL " + param1?.Icon?.URL)
+            val circularProgressDrawable = CircularProgressDrawable(context!!)
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 30f
+            circularProgressDrawable.start()
+
             Glide.with(it)
                 .load(param1?.Icon?.URL)
-                .placeholder(R.drawable.mtrl_popupmenu_background_dark) //TODO replace with better Icon here
+                    .placeholder(circularProgressDrawable) //TODO replace with better Icon here
                 .into(icon_iv)
         }
         var description = param1?.Text?.split(" - ")
