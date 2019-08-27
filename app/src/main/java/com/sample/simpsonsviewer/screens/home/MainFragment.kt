@@ -13,6 +13,7 @@ import com.sample.simpsonsviewer.R
 import com.sample.simpsonsviewer.screens.home.delegates.ListItemClick
 import kotlinx.android.synthetic.main.fragment_main.*
 
+
 class MainFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var viewModel: MainListViewModel
@@ -54,6 +55,20 @@ class MainFragment : Fragment() {
         mRecyclerView.adapter = postListAdapter
         viewModel.resultData.observe(this, Observer {
             postListAdapter.updatePostList(it)
+        })
+
+        //Search
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                postListAdapter.getFilter().filter(newText)
+                return true
+            }
         })
 
     }

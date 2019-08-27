@@ -1,8 +1,9 @@
 package com.sample.simpsonsviewer.screens.home
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.simpsonsviewer.R
 import com.sample.simpsonsviewer.extensions.inflate
@@ -11,9 +12,46 @@ import com.sample.simpsonsviewer.screens.home.MainListAdapter.ListHolder
 import com.sample.simpsonsviewer.screens.home.delegates.ListItemClick
 import kotlinx.android.synthetic.main.list_item_row.view.*
 
-class MainListAdapter(listener: ListItemClick?) : RecyclerView.Adapter<ListHolder>() {
+class MainListAdapter(listener: ListItemClick?) : RecyclerView.Adapter<ListHolder>(), Filterable {
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): Filter.FilterResults {
+
+                val charString = charSequence.toString()
+
+                if (charString.isEmpty()) {
+
+                    filteredTopics = originalTopics
+                } else {
+
+                    val filteredList = arrayListOf<RelatedTopic>()
+
+                    for (topic in originalTopics) {
+
+                        if (topic.Text.toLowerCase().contains(charString)) {
+
+                            filteredList.add(topic)
+                        }
+                    }
+
+                    filteredTopics = filteredList
+                }
+
+                val filterResults = Filter.FilterResults()
+                filterResults.values = filteredTopics
+                return filterResults
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults) {
+                filteredTopics = filterResults.values as List<RelatedTopic>
+                notifyDataSetChanged()
+            }
+        }
+    }
+
     private var itemClick: ListItemClick = listener!!
-    private lateinit var relatedTopics: List<RelatedTopic>
+    private lateinit var originalTopics: List<RelatedTopic>
+    private lateinit var filteredTopics: List<RelatedTopic>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListHolder {
         val inflatedView = parent.inflate(R.layout.list_item_row, false)
@@ -21,18 +59,19 @@ class MainListAdapter(listener: ListItemClick?) : RecyclerView.Adapter<ListHolde
     }
 
     override fun getItemCount(): Int {
-        return if (::relatedTopics.isInitialized) relatedTopics.size else 0
+        return if (::filteredTopics.isInitialized) filteredTopics.size else 0
     }
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
-        holder.bind(relatedTopics[position])
+        holder.bind(filteredTopics[position])
     }
 
 
     fun updatePostList(relatedTopics: List<RelatedTopic>) {
-        this.relatedTopics = relatedTopics
+        this.originalTopics = relatedTopics
+        this.filteredTopics = relatedTopics
         notifyDataSetChanged()
-        itemClick.updateDetailsFragmentOnStartup(this.relatedTopics[0])
+        itemClick.updateDetailsFragmentOnStartup(this.filteredTopics[0])
     }
 
     class ListHolder(

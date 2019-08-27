@@ -17,6 +17,7 @@ class MainActivity : SingleFragmentActivity(), ListItemClick {
     }
 
     override fun onItemSelected(relatedTopic: RelatedTopic) {
+        hideKeyboard(activity = this)
         if (resources.getBoolean(R.bool.isTablet)) {
             updateDetailsFragment(DetailFragment.newInstance(relatedTopic))
         } else {
