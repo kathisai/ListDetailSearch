@@ -24,7 +24,6 @@ jobs:
           name: Run Tests
           command: ./gradlew lint tests
       - run:
-          name: See the if apk is there
-          command: cd ~/code/build
-          command: ls
+          name: Run directory
+          command: cd ~/code/build && ls
 
