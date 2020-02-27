@@ -25,5 +25,5 @@ jobs:
 #          command: ./gradlew lint tests
       - run:
           name: Run directory
-          command: cd ~/code/build/outputs/apk/ && ls
+          command: cd ~/code/build && ls
 
