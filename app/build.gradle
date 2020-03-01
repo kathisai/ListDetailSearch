@@ -7,6 +7,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+// Used to set the package version name and version code
+ext.versionMajor = 1
+ext.versionMinor = 2
+
     compileSdkVersion 28
     lintOptions { 
          abortOnError false 
@@ -15,8 +19,8 @@ android {
         applicationId "com.sample.simpsonsviewer"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionName computeVersionName()
+        versionCode computeVersionCode()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         flavorDimensions "default"
@@ -81,4 +85,19 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.3.0-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha02'
+}
+
+
+// Will return "1.2" in this example
+def computeVersionName() {
+    // Basic <major>.<minor> version name
+    return String.format('%d.%d', versionMajor, versionMinor)
+}
+
+// Will return 120042 for Jenkins build #42
+def computeVersionCode() {
+    // Major + minor + Jenkins build number (where available)
+    return (versionMajor * 100000)
+             + (versionMinor * 10000)
+             + Integer.valueOf(System.env.CIRCLE_BUILD_NUM ?: 0)
 }
