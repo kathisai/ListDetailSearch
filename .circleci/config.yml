@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/code
@@ -38,7 +38,7 @@ orbs:
   slack: circleci/slack@3.4.2
 version: 2.1
 workflows:
-  your-workflow:
+  android-workflow:
     jobs:
       - build
 
