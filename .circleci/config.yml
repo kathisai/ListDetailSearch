@@ -6,6 +6,12 @@ jobs:
       - image: circleci/android:api-28
     environment:
       JVM_OPTS: -Xmx3200m
+    description: A handy command to notify a Slack channel on failure in the default master  branch
+      parameters:
+        only_for_branches:
+          default: 'master'
+          description: If set, a comma-separated list of branches for which to sendnotifications. No spaces.
+          type: string
     steps:
       - checkout
       - restore_cache:
@@ -34,12 +40,6 @@ jobs:
           mentions: 'prathapk'
           message: This is a custom message notification
           webhook: ${SLACK_WEBHOOK}
-          description: >A handy command to notify a Slack channel on failure in the default master  branch
-          parameters:
-           only_for_branches:
-            default: 'master'
-            description: >If set, a comma-separated list of branches for which to sendnotifications. No spaces.
-            type: string
       - run: exit 0
       - slack/status:
           fail_only: true
