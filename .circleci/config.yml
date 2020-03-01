@@ -36,8 +36,8 @@ jobs:
           webhook: ${SLACK_WEBHOOK}
       - run: exit 0
       - slack/status:
-          fail_only: true
-          mentions: 'USERID1,USERID2'
+          fail_only: false
+          mentions: 'prathapk'
           only_for_branches: 'master'
           webhook: webhook      
 orbs:
