@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Run directory
           command: cd ~/code/app/build/outputs/apk/simpsons/debug && ls
-                - run:
+      - run:
           name: Upload app to seeTest
           command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control: no-cache' --header 'Content-Type: multipart/form-data' --header 'Authorization: Bearer $token_seeTest' --form 'file=@~/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'
 
