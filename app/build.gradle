@@ -93,7 +93,7 @@ dependencies {
 // Will return "1.2" in this example
 def computeVersionName() {
     // Basic <major>.<minor> version name
-    return String.format('%d.%d', versionMajor, versionMinor)
+    return String.format('%d.%d', $versionMajor, $versionMinor)
 }
 
 // Will return 120042 for Jenkins build #42
