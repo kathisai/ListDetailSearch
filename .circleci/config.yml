@@ -34,6 +34,18 @@ jobs:
           mentions: 'prathapk'
           message: This is a custom message notification
           webhook: ${SLACK_WEBHOOK}
+          description: >A handy command to notify a Slack channel on failure in the default master  branch
+          parameters:
+           only_for_branches:
+            default: 'master'
+            description: >If set, a comma-separated list of branches for which to sendnotifications. No spaces.
+            type: string
+      - run: exit 0
+      - slack/status:
+          fail_only: true
+          mentions: 'USERID1,USERID2'
+          only_for_branches: <<parameters.only_for_branches>>
+          webhook: webhook      
 orbs:
   slack: circleci/slack@3.4.2
 workflows:
