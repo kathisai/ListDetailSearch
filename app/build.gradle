@@ -7,10 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-// Used to set the package version name and version code
-ext.versionMajor = 1
-ext.versionMinor = 2
-
     compileSdkVersion 28
     lintOptions { 
          abortOnError false 
@@ -51,6 +47,12 @@ ext.versionMinor = 2
 
 }
 
+ext {
+    // Used to set the package version name and version code
+    versionMajor = 1
+    versionMinor = 2
+
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
