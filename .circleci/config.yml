@@ -6,12 +6,6 @@ jobs:
       - image: circleci/android:api-28
     environment:
       JVM_OPTS: -Xmx3200m
-    description: A handy command to notify a Slack channel on failure in the default master  branch
-      parameters:
-        only_for_branches:
-          default: 'master'
-          description: If set, a comma-separated list of branches for which to sendnotifications. No spaces.
-          type: string
     steps:
       - checkout
       - restore_cache:
@@ -44,7 +38,7 @@ jobs:
       - slack/status:
           fail_only: true
           mentions: 'USERID1,USERID2'
-          only_for_branches: <<parameters.only_for_branches>>
+          only_for_branches: 'master'
           webhook: webhook      
 orbs:
   slack: circleci/slack@3.4.2
