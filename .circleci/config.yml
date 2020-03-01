@@ -29,4 +29,16 @@ jobs:
       - run:
           name: Upload app to seeTest
           command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'prathapk'
+          message: This is a custom message notification
+          webhook: ${SLACK_WEBHOOK}
+orbs:
+  slack: circleci/slack@3.4.2
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - build
 
