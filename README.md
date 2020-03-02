@@ -6,4 +6,4 @@ Phones, the list and detail should be separate screens, on Tablets, list and det
 
 Create two productFlavours for diffrent REST API
 
-interview preparations. 
+interview preparations. test
