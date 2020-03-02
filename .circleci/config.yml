@@ -1,9 +1,9 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-28
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -14,17 +14,40 @@ jobs:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
+          name: Build applicaiton
+          command: ./gradlew assembleDebug
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#          name: Run Tests
+#          command: ./gradlew lint tests
       - run:
-          name: Run Tests
-          command: ./gradlew lint tests
+          name: Run directory
+          command: cd ~/code/app/build/outputs/apk/simpsons/debug && pwd
       - run:
-          name: See the if apk is there
-          command: cd ~/code/build
-          command: ls
+          name: Upload app to seeTest
+          command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'
+      - slack/approval:
+          message: Pending approval
+          webhook: ${SLACK_WEBHOOK}    
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'prathapk'
+          message: This is a custom message notification
+          webhook: ${SLACK_WEBHOOK}
+      - run: exit 0
+      - slack/status:
+          fail_only: true
+          mentions: 'prathapk'
+          only_for_branches: 'master'
+          failure_message: 'Build failed'
+          webhook: ${SLACK_WEBHOOK}      
+orbs:
+  slack: circleci/slack@3.4.2
+workflows:
+  android-workflow:
+    jobs:
+      - build
 

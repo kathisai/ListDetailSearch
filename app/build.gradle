@@ -8,12 +8,15 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    lintOptions { 
+         abortOnError false 
+     } 
     defaultConfig {
         applicationId "com.sample.simpsonsviewer"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         flavorDimensions "default"
