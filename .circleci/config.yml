@@ -53,7 +53,7 @@ workflows:
 #          message: Pending approval
 #          webhook: ${SLACK_WEBHOOK}     
       - build:
-          type: approval 
+#          type: approval 
           filters:
             branches:
               only:
