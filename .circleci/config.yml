@@ -50,8 +50,6 @@ jobs:
           only_for_branches: 'master'
           failure_message: 'Build failed'
           webhook: ${SLACK_WEBHOOK}      
-orbs:
-  slack: circleci/slack@3.4.2
 workflows:
   android-workflow:
     jobs:
