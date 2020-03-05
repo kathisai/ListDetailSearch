@@ -4,6 +4,9 @@ orbs:
  slack: circleci/slack@3.4.2
 jobs:
   build:
+    branches:
+      only:
+        - master
     working_directory: ~/code
     executor: android/android
     environment:
