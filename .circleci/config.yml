@@ -49,9 +49,9 @@ jobs:
 workflows:
   android-workflow:
     jobs:
-      - slack/approval-notification:
-          message: Pending approval
-          webhook: ${SLACK_WEBHOOK}     
+#      - slack/approval-notification:
+#          message: Pending approval
+#          webhook: ${SLACK_WEBHOOK}     
       - build:
           type: approval 
           filters:
