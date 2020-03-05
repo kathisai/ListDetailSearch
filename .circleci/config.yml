@@ -33,10 +33,7 @@ jobs:
 #          command: cd ~/code/app/build/outputs/apk/simpsons/debug && pwd
       - run:
           name: Upload app to seeTest
-          command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'
-      - slack/approval:
-          message: Pending approval
-          webhook: ${SLACK_WEBHOOK}    
+          command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'   
       - slack/notify:
           color: '#42e2f4'
           mentions: 'prathapk'
@@ -57,3 +54,6 @@ workflows:
             branches:
               only:
                 - master
+      - slack/approval-notification:
+          message: Pending approval
+          webhook: ${SLACK_WEBHOOK}                
