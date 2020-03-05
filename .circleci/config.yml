@@ -19,7 +19,7 @@ jobs:
 #         command: sudo chmod +x ./gradlew
       - run:
           name: Build applicaiton
-          command: ./gradlew assembleDebug
+          command: ./gradlew assembleDebugg
       - android/save-build-cache
 #      - save_cache:
 #          paths:
