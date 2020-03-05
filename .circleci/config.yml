@@ -3,7 +3,7 @@ orbs:
  android: circleci/android@0.2.1
  slack: circleci/slack@3.4.2
 jobs:
-  - build:
+  build:
        filters:
           branches:
             only: master
