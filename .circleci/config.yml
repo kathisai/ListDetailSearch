@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
 #      - accept-licenses
-      - restore-build-cache
+      - android/restore-build-cache
 #      - restore_cache:
 #          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build applicaiton
           command: ./gradlew assembleDebug
-      - save-build-cache
+      - android/save-build-cache
 #      - save_cache:
 #          paths:
 #            - ~/.gradle
