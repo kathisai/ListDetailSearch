@@ -36,7 +36,7 @@ jobs:
           command: curl -sL firebase.tools | bash
       - run:
           name: App distrubute to firebase
-          command: firebase appdistribution:distribute '~/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk'  --app '$FIREBASE_APP_ID' --token '$FIREBASE_TOKEN' --release-notes "Bug fixes and improvements" --testers "prathap@actoapp.com”         
+          command: firebase appdistribution:distribute '~/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk'  --app '$FIREBASE_APP_ID' --token '$FIREBASE_TOKEN' --release-notes "Bug fixes and improvements" --testers "prathap@actoapp.com"
       - run:
           name: Upload app to seeTest
           command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'   
