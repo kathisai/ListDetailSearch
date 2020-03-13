@@ -55,11 +55,11 @@ jobs:
           command: git  -c http.sslVerify=false clone https://RekhaBomma:$GIT_ACCESS_TOKEN@github.com/RekhaBomma/ACTO_3.0.git          
       - run: cd ~/code && ls
       - run:
-          name: directory
-          command: cd ACTO_3.0 && ls  
+          name: change branch
+          command: cd ACTO_3.0 && git checkout QE-1  
       - run:
           name: Run Automation scripts
-          command: cd ~/code/ACTO_3.0/ACTO3_SeeTest && git checkout QE-1 && mvn test          
+          command: cd ~/code/ACTO_3.0/ACTO3_SeeTest  && mvn test          
       - slack/status:
           fail_only: true
           mentions: 'prathapk'
