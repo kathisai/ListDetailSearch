@@ -14,12 +14,10 @@ jobs:
       - android/restore-build-cache
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
-
       - run:
           name: Build applicaiton
           command: ./gradlew assembleDebug
       - android/save-build-cache
-
 #      - run:
 #          name: Run Tests
 #          command: ./gradlew lint tests
@@ -28,8 +26,8 @@ jobs:
 #          name: Run directory
 #          command: cd ~/code/app/build/outputs/apk/simpsons/debug && pwd
       - run:
-          name: Install Firebase CLI
-         command: curl -sL firebase.tools | bash
+          name:  Install Firebase CLI
+          command: curl -sL firebase.tools | bash
       - run:
           name: App distrubute to firebase
           command: firebase appdistribution:distribute /home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk  --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --release-notes "Bug fixes and improvements and " --testers "prathap@actoapp.com"
