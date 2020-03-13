@@ -47,7 +47,7 @@ jobs:
           command: sudo mv apache-maven-3.6.3 /opt/
       - run:
           name: Run directory
-          command: cd ~/opt/ && pwd && ls && cd apache-maven-3.6.3 && ls         
+          command: cd /opt/ && pwd && ls && cd apache-maven-3.6.3 && ls         
       - run:
           name: Add maven path to PATH
           command: PATH="/opt/apache-maven-3.6.3/bin:$PATH"
