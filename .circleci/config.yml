@@ -15,10 +15,10 @@ jobs:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
 
-#       - run:
-#           name: Build applicaiton
-#           command: ./gradlew assembleDebug
-#      - android/save-build-cache
+      - run:
+          name: Build applicaiton
+          command: ./gradlew assembleDebug
+     - android/save-build-cache
 
 #      - run:
 #          name: Run Tests
@@ -27,15 +27,15 @@ jobs:
 #      - run:
 #          name: Run directory
 #          command: cd ~/code/app/build/outputs/apk/simpsons/debug && pwd
-#       - run:
-#           name: Install Firebase CLI
-#          command: curl -sL firebase.tools | bash
-#       - run:
-#           name: App distrubute to firebase
-#           command: firebase appdistribution:distribute /home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk  --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --release-notes "Bug fixes and improvements and " --testers "prathap@actoapp.com"
-#       - run:
-#           name: Upload app to seeTest
-#           command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'   
+      - run:
+          name: Install Firebase CLI
+         command: curl -sL firebase.tools | bash
+      - run:
+          name: App distrubute to firebase
+          command: firebase appdistribution:distribute /home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk  --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --release-notes "Bug fixes and improvements and " --testers "prathap@actoapp.com"
+      - run:
+          name: Upload app to seeTest
+          command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'   
       - run:
           name: Install maven
           command: sudo wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
