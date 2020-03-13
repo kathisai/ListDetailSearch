@@ -55,6 +55,9 @@ jobs:
           name: Add maven path to PATH
           command: export PATH
       - run:
+          name: check PATH
+          command: echo $PATH          
+      - run:
           name: Check maven version
           command: mvn --version    
       - slack/status:
