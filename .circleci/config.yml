@@ -53,10 +53,9 @@ jobs:
       - run:
           name: Clone Autommation scripts 
           command: git  -c http.sslVerify=false clone https://RekhaBomma:$GIT_ACCESS_TOKEN@github.com/RekhaBomma/ACTO_3.0.git          
-      - run: cd ACTO_3.0
-      - run: git checkout QE-1      
-      - run: cd ACTO3_SeeTest
-      - run: mvn test 
+      - run:
+          name: Run Automation scripts
+          command: cd ~/code/ACTO_3.0/ACTO3_SeeTest && git checkout QE-1 && mvn test          
       - slack/status:
           fail_only: true
           mentions: 'prathapk'
