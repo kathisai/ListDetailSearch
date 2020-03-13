@@ -54,7 +54,7 @@ jobs:
           command: PATH="/opt/apache-maven-3.6.3/bin:$PATH"
       - run:
           name: Add maven path to PATH
-          command: sudo export PATH
+          command: export PATH
       - run:
           name: Check maven version
           command: mvn --version    
