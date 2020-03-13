@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Build applicaiton
           command: ./gradlew assembleDebug
-     - android/save-build-cache
+      - android/save-build-cache
 
 #      - run:
 #          name: Run Tests
