@@ -48,9 +48,8 @@ jobs:
       - run:
           name: Run directory
           command: cd /opt/ && pwd && ls && cd apache-maven-3.6.3 && ls && PATH="/opt/apache-maven-3.6.3/bin:$PATH" && export PATH        
-      - run:
-          name: check PATH
-          command: echo $PATH          
+      - run: echo 'export PATH=/opt/apache-maven-3.6.3/bin:$PATH' >> $BASH_ENV
+      - run: source /home/circleci/.bashrc       
       - run:
           name: Check maven version
           command: mvn --version    
