@@ -40,6 +40,24 @@ jobs:
       - run:
           name: Upload app to seeTest
           command: curl --location --request POST 'https://cloud.seetest.io/api/v1/applications/new' --header 'Cache-Control:no-cache' --header 'Content-Type:multipart/form-data' --header "Authorization:Bearer $token_seeTest" --form 'file=@/home/circleci/code/app/build/outputs/apk/simpsons/debug/app-simpsons-debug.apk' --form 'project=SampleProject'   
+      - run:
+          name: Install maven
+          command: sudo wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+      - run:
+          name: Extrax maven
+          command: sudo tar -xvf apache-maven-3.6.3-bin.tar.gz
+      - run:
+          name: Move maven to opt
+          command: mv apache-maven-3.6.3 ~/opt/
+      - run:
+          name: Add maven path to PATH
+          command: PATH="/opt/apache-maven-3.6.3/bin:$PATH"
+      - run:
+          name: Add maven path to PATH
+          command: export PATH
+      - run:
+          name: Check maven version
+          command: mvn --version    
       - slack/status:
           fail_only: true
           mentions: 'prathapk'
