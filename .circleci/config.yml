@@ -48,7 +48,7 @@ jobs:
           command: sudo tar -xvf apache-maven-3.6.3-bin.tar.gz
       - run:
           name: Move maven to opt
-          command: mv apache-maven-3.6.3 ~/opt/
+          command: sudo mv apache-maven-3.6.3 ~/opt/
       - run:
           name: Add maven path to PATH
           command: PATH="/opt/apache-maven-3.6.3/bin:$PATH"
